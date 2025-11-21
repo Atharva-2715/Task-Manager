@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-icon">
+            <img src="image/logo.png" alt="Task Manager Logo" />
+          </span>
+          <h2>Task Manager</h2>
+        </div>
+        <nav class="nav-links">
+          <button class="nav-link active" data-view="tasks">Tasks</button>
+          <button class="nav-link" data-view="logs">Audit Logs</button>
+        </nav>
+      </aside>
+
+      <div class="main-area">
+        <header class="topbar">
+          <h2>Dashboard</h2>
+          <button id="newTaskBtn" class="primary-btn">+ New Task</button>
+        </header>
+
+        <main>
+          <section id="taskSection">
+            <div class="panel">
+              <div class="panel-header">
+                <div class="search-group">
+                  <label for="searchInput" class="sr-only">Search tasks</label>
+                  <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by title or description"
+                  />
+                  <button id="clearSearchBtn" class="ghost-btn">Clear</button>
+                </div>
+                <button id="refreshTasksBtn" class="ghost-btn">Refresh</button>
+              </div>
+              <div class="table-wrapper">
+                <table id="taskTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Created At</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div class="pagination">
+                <button id="prevPage" class="ghost-btn">Previous</button>
+                <span id="paginationInfo">Page 1</span>
+                <button id="nextPage" class="ghost-btn">Next</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="logSection" class="hidden">
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Audit Logs</h3>
+                <button id="refreshLogsBtn" class="ghost-btn">Refresh</button>
+              </div>
+              <div class="table-wrapper">
+                <table id="logTable">
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>Action Type</th>
+                      <th>Task ID</th>
+                      <th>Updated Content</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="modalBackdrop" class="modal-backdrop hidden"></div>
+    <section id="taskModal" class="modal hidden" aria-modal="true" role="dialog">
+      <div class="modal-card">
+        <header class="modal-header">
+          <h3 id="modalTitle">Create Task</h3>
+          <button id="closeModalBtn" class="ghost-btn">&times;</button>
+        </header>
+        <form id="taskForm">
+          <input type="hidden" id="taskId" />
+          <label for="taskTitle">Title</label>
+          <input
+            id="taskTitle"
+            name="title"
+            type="text"
+            maxlength="100"
+            required
+          />
+          <label for="taskDescription">Description</label>
+          <textarea
+            id="taskDescription"
+            name="description"
+            maxlength="500"
+            required
+          ></textarea>
+          <p id="formError" class="form-error" role="alert"></p>
+          <div class="modal-actions">
+            <button type="button" id="cancelModalBtn" class="ghost-btn">
+              Cancel
+            </button>
+            <button type="submit" class="primary-btn">Save Task</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
+
